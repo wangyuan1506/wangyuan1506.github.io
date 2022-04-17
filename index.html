@@ -152,19 +152,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-总结学习的命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/17/%E6%80%BB%E7%BB%93/">总结</a>
+      <a class="article-title" href="/2022/04/17/%E6%80%BB%E7%BB%93%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%91%BD%E4%BB%A4/">总结de命令</a>
     </h1>
   
 
         
-        <a href="/2022/04/17/%E6%80%BB%E7%BB%93/" class="archive-article-date">
+        <a href="/2022/04/17/%E6%80%BB%E7%BB%93%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%91%BD%E4%BB%A4/" class="archive-article-date">
   	<time datetime="2022-04-17T04:55:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-17</time>
 </a>
         
@@ -172,7 +172,54 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h1><p>分布式协调工具111</p>
+        <h1 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h1><h2 id="启动zookeeper"><a href="#启动zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zkserver.sh start </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="启动HDFS-MapReduce"><a href="#启动HDFS-MapReduce" class="headerlink" title="启动HDFS+MapReduce"></a>启动HDFS+MapReduce</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-all.sh</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">访问hdfs http://node01:9870</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【单独启动HDFS：(hdfs –daemon start journalnode)、(hdfs –daemon start namenode)、(hdfs namenode -bootstrapStandby)、(hdfs zkfc -formatZK)、(start-dfs.sh)】</p>
+<p>【单独启动MapReduce:(start-yarn.sh)、<strong>开启日志，可以不开</strong>(mr-jobhistory-daemon.sh start historyserver) 】</p>
+</blockquote>
+<h2 id="启动hive方式"><a href="#启动hive方式" class="headerlink" title="启动hive方式"></a>启动hive方式</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">1:【不推荐使用】</span></span><br><span class="line">hive --service metastore  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">2:【推荐使用，因为启动后使用beeline连接】</span></span><br><span class="line">hiveserver2  </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">后台启动，记录启动后的日志</span></span><br><span class="line"><span class="meta prompt_">   #</span><span class="language-bash"><span class="built_in">nohup</span> 上面两个其中任意的启动命令 &gt; 输出到的日志路径 2&gt;&amp;1 &amp;</span></span><br><span class="line">   nohup hiveserver2 &gt; /dev/null 2&gt;&amp;1 &amp; #【最后这个&amp;,表示后台启动的意思】</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="启动HBase"><a href="#启动HBase" class="headerlink" title="启动HBase"></a>启动HBase</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-hbase.sh</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">访问路径：http://node01:16010</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="启动Phoenix"><a href="#启动Phoenix" class="headerlink" title="启动Phoenix"></a>启动Phoenix</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在安装的Phoenix的bin目录下</span></span><br><span class="line">./sqlline.py node01,node02,node03:2181</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="启动ganglia"><a href="#启动ganglia" class="headerlink" title="启动ganglia"></a>启动ganglia</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动node01内容</span></span><br><span class="line">[root@node01 bin]# systemctl restart httpd.service</span><br><span class="line">[root@node01 bin]# systemctl restart gmetad.service</span><br><span class="line">[root@node01 ~]# netstat -tnlp |grep gmetad</span><br><span class="line">tcp 0 0 0.0.0.0:8651 0.0.0.0:* LISTEN 16874/gmetad</span><br><span class="line">tcp 0 0 0.0.0.0:8652 0.0.0.0:* LISTEN 16874/gmetad</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">启动集群所有内容</span></span><br><span class="line">[123 ~]# systemctl start gmond.service</span><br><span class="line">[123 ~]# netstat -tnlp |grep gmond</span><br><span class="line">tcp 0 0 0.0.0.0:8649 0.0.0.0:* LISTEN 14797/gmond</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">访问集群</span></span><br><span class="line">http://192.168.88.101/ganglia/</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="启动AzKaban和Azkaban-Web"><a href="#启动AzKaban和Azkaban-Web" class="headerlink" title="启动AzKaban和Azkaban-Web"></a>启动AzKaban和Azkaban-Web</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动AzKaban</span></span><br><span class="line">cd /opt/yjx/azkaban-exec-server-3.90.0 #&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 这个目录下！！！！！</span><br><span class="line">curl -G &quot;localhost:$(&lt;./executor.port)/executor?action=activate&quot; &amp;&amp; echo #激活!!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动AzKaBan-Web</span></span><br><span class="line">cd /opt/yjx/azkaban-3.90.0/azkaban-web-server-3.90.0/</span><br><span class="line">bin/start-web.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">访问集群</span></span><br><span class="line">http://node01:8081</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="访问命令"><a href="#访问命令" class="headerlink" title="访问命令"></a>访问命令</h1><h2 id="访问Hive"><a href="#访问Hive" class="headerlink" title="访问Hive"></a>访问Hive</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">服务端启动metastore服务：</span></span><br><span class="line">hive --service metastore  </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入命令:</span></span><br><span class="line">hive</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">退出命令行：</span></span><br><span class="line">quit;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动服务名</span></span><br><span class="line">hiveserver2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入命令:</span></span><br><span class="line">1)先执行beeline，在执行! connect jdbc:hive2://node01:10000</span><br><span class="line">2)或者直接执行 beeline -u jdbc:hive2://node01:10000 -n root</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">退出命令行：</span></span><br><span class="line">！exit</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="访问路径"><a href="#访问路径" class="headerlink" title="访问路径"></a>访问路径</h1><h2 id="访问HDFS"><a href="#访问HDFS" class="headerlink" title="访问HDFS"></a>访问HDFS</h2><blockquote>
+<p>访问hdfs <a target="_blank" rel="noopener" href="http://node01:9870/">http://node01:9870</a></p>
+</blockquote>
+<h2 id="访问HBase"><a href="#访问HBase" class="headerlink" title="访问HBase"></a>访问HBase</h2><blockquote>
+<p>访问路径：<a target="_blank" rel="noopener" href="http://node01:16010/">http://node01:16010</a></p>
+</blockquote>
+<h2 id="访问ganglia-x2F"><a href="#访问ganglia-x2F" class="headerlink" title="访问ganglia&#x2F;"></a>访问ganglia&#x2F;</h2><blockquote>
+<p>访问路径: <a target="_blank" rel="noopener" href="http://192.168.88.101/ganglia/">http://192.168.88.101/ganglia/</a></p>
+</blockquote>
+<h2 id="访问Azkaban"><a href="#访问Azkaban" class="headerlink" title="访问Azkaban"></a>访问Azkaban</h2><blockquote>
+<p>访问集群 : <a target="_blank" rel="noopener" href="http://node01:8081/">http://node01:8081</a></p>
+</blockquote>
 
       
 
@@ -185,7 +232,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/17/%E6%80%BB%E7%BB%93/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/04/17/%E6%80%BB%E7%BB%93%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%91%BD%E4%BB%A4/">展开全文 >></a>
         </p>
       
 
